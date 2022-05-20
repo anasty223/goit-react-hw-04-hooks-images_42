@@ -7,7 +7,7 @@ export default function Searchbar({ onSubmit }) {
 
   const onSubmitForm = (e) => {
     e.preventDefault();
-    console.log("this.state in form", query);
+    // console.log("this.state in form", query);
     onSubmit(query);
 
     reset();
@@ -38,6 +38,9 @@ export default function Searchbar({ onSubmit }) {
     </Header>
   );
 }
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
 // class Searchbar extends Component {
 //   static defaultProps = {

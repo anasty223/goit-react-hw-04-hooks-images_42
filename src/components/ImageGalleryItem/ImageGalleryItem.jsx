@@ -3,13 +3,15 @@ import PropTypes from "prop-types";
 
 const ImageGalleryItem = ({ img, modalImg, tags, handleTogleModal }) => {
   return (
-    <Items
-      onClick={({ target: { alt } }) => {
-        handleTogleModal(modalImg, alt);
-      }}
-    >
-      <Image src={img} alt={tags} />
-    </Items>
+    
+      <Items
+        onClick={({ target: { alt } }) => {
+          handleTogleModal(modalImg, alt);
+        }}
+      >
+        <Image src={img} alt={tags} />
+      </Items>
+    
   );
 };
 
