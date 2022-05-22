@@ -8,13 +8,14 @@ export default function Modal({ handleTogleModal, modalImg, tag }) {
       handleTogleModal();
     }
   };
+
   useEffect(() => {
     window.addEventListener("keydown", onCloseModalByEsc);
 
     return () => {
       window.removeEventListener("keydown", onCloseModalByEsc);
     };
-  }, [onCloseModalByEsc]);
+  });
 
   return (
     <Overlay

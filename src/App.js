@@ -22,10 +22,10 @@ export default function App() {
   const [modalAlt, setModalAlt] = useState("");
 
   const formSubmitHandler = (searchQuery) => {
-    // console.log("searchQuery", searchQuery);
     if (searchQuery.trim() === "") {
       return NotificationManager.error("Error", "Enter text!", 3000);
     }
+
     setSearchQuery(searchQuery);
     setIsPending(true);
     setImages([]);
@@ -35,9 +35,13 @@ export default function App() {
   const toggleModal = (image, alt) => {
     setShowModal((prev) => ({
       showModal: !prev.showModal,
+
       modalImg: image,
       modalAlt: alt,
     }));
+    setModalAlt(alt);
+    setModalImg(image);
+    // setPage((prevPage) => prevPage + 1);
   };
   useEffect(() => {
     if (!searchQuery) {
@@ -46,21 +50,20 @@ export default function App() {
     if (isPending) {
       fetchImages(searchQuery, page)
         .then((img) => {
-          // console.log("img", img);
           if (img.length === 0) {
             setImages([]);
             setIsPending(false);
+
             return NotificationManager.warning(
               "Warning ",
               `Not found "${searchQuery}"`,
               3000
             );
           }
-          setIsPending(false);
-          // setPage(1);//это была ошибка кей и страниц
 
-          setImages((prev) => [...prev, ...img]);
           setIsPending(false);
+          // setPage(1); //это была ошибка кей и страниц
+          setImages((prev) => [...prev, ...img]);
         })
         .catch((error) => {
           console.log(error.massage);
@@ -83,7 +86,7 @@ export default function App() {
       {images.length >= 12 && (
         <ButtonLoadMore handleLoadMore={handleLoadMore} />
       )}
-      {showModal && (
+      {showModal.showModal && (
         <Modal
           modalImg={modalImg}
           handleTogleModal={toggleModal}
